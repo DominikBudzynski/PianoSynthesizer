@@ -50,8 +50,8 @@ uint16_t changeTone(uint16_t tone, int8_t octave){
 //ISR
 void SysTick_Handler(void)	
 { 
-	if (licznik > 3) 
-		licznik = 0;
+	if (col_counter > 3) 
+		col_counter = 0;
 		
 	if (pin < 8160){	//checking if any key is pressed
 		row_numb = pin;
@@ -67,7 +67,7 @@ void SysTick_Handler(void)
 
 	PTA->PDOR = out;	//sending "out" to the pins
 		
-	++licznik;
+	++col_counter;
 	if (sustain == 255 && set_octaves == 255){
 		dac=(Sinus[phase] / 100) * slider + 0x0800;
 		DAC_Load_Trig(dac);
